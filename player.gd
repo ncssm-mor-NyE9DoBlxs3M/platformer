@@ -1,17 +1,19 @@
 extends CharacterBody2D
 
-const speed_cap: float = 1000.
-const accel_rate: float = 500.
-const decel_rate: float = 900.
-@export var air_accel_rate: float = 200.
-@export var air_decel_rate: float = 400.
-const min_jump_strength: float = 0
-const max_jump_strength: float = INF
-const coyote_time: float = .2
-const jump_conversion: float = 1
-var current_coyote_time: float
+@export_group("Movement")
+@export var speed_cap: float = 1000.
+@export var accel_rate: float = 500.
+@export var decel_rate: float = 900.
+@export var air_accel_rate: float = 100.
+@export var air_decel_rate: float = 250.
+@export var min_jump_strength: float = 150
+@export var max_jump_strength: float = 300
+@export var coyote_time: float = .2
+@export var jump_conversion: float = .5
+@export_group("Animation")
+@export var max_run_anim_speed: float = 50.
 
-const max_run_anim_speed: float = 50.
+var current_coyote_time: float
 
 func _process(delta) -> void:
 	var input := Input.get_axis("left", "right")
@@ -24,7 +26,7 @@ func _process(delta) -> void:
 		current_coyote_time = max(0, current_coyote_time-delta)
 		velocity.y += get_gravity().y * delta
 	if is_on_floor() or current_coyote_time > 0.:
-		if Input.is_action_just_pressed("jump"):
+		if Input.is_action_pressed("jump"):
 			current_coyote_time = 0
 			var jump_strength = min(jump_conversion*abs(velocity.x), max_jump_strength-min_jump_strength)
 			velocity.y -= jump_strength+min_jump_strength
