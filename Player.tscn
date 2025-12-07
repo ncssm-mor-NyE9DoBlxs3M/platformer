@@ -35,7 +35,8 @@ script = ExtResource("1_kpjcp")
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_e80uo")
 animation = &"run"
-frame_progress = 0.4727325
+autoplay = "run"
+frame_progress = 0.17993931
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, -16)
@@ -43,7 +44,3 @@ shape = SubResource("RectangleShape2D_kne1u")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
-
-[node name="Label" type="Label" parent="."]
-offset_right = 40.0
-offset_bottom = 23.0
