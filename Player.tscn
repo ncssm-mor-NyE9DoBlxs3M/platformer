@@ -1,7 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://d2la8or3pq5np"]
+[gd_scene load_steps=12 format=3 uid="uid://d2la8or3pq5np"]
 
 [ext_resource type="Script" uid="uid://bl4rrxrfbc8jx" path="res://player.gd" id="1_kpjcp"]
 [ext_resource type="Texture2D" uid="uid://4u1lpn3iaved" path="res://assets/placeholder_run.png" id="1_xhfnw"]
+[ext_resource type="Texture2D" uid="uid://beu3rgdv660cn" path="res://assets/late_for_check.png" id="3_e80uo"]
+[ext_resource type="AudioStream" uid="uid://b60ug8s68ecjn" path="res://assets/youve_got_a_minor.wav" id="4_cxr5p"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kpjcp"]
 atlas = ExtResource("1_xhfnw")
@@ -28,6 +30,67 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kne1u"]
 size = Vector2(17, 32)
 
+[sub_resource type="Animation" id="Animation_e80uo"]
+resource_name = "death"
+length = 0.75
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera/DeathScreen:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.75),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera/DeathSound:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_cxr5p"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera/DeathScreen:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera/DeathSound:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tdg3f"]
+_data = {
+&"RESET": SubResource("Animation_cxr5p"),
+&"death": SubResource("Animation_e80uo")
+}
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_kpjcp")
 
@@ -36,11 +99,25 @@ position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_e80uo")
 animation = &"run"
 autoplay = "run"
-frame_progress = 0.17993931
+frame_progress = 0.32756504
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, -16)
 shape = SubResource("RectangleShape2D_kne1u")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
+
+[node name="DeathScreen" type="Sprite2D" parent="Camera"]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(0.9999962, 0.99998665)
+scale = Vector2(1.0881355, 0.9354005)
+texture = ExtResource("3_e80uo")
+
+[node name="DeathSound" type="AudioStreamPlayer" parent="Camera"]
+stream = ExtResource("4_cxr5p")
+
+[node name="Animations" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_tdg3f")
+}

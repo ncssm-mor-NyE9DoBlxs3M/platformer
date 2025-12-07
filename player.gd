@@ -28,3 +28,6 @@ func _process(delta) -> void:
 		velocity = velocity.normalized()*speed_cap
 	$Sprite.speed_scale = (velocity.x/speed_cap)*max_run_anim_speed
 	move_and_slide()
+	if position.y > 1000: # placeholder for death condition
+		position = Vector2.ZERO
+		$Animations.play("death")
