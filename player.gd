@@ -30,4 +30,5 @@ func _process(delta) -> void:
 	move_and_slide()
 	if position.y > 1000: # placeholder for death condition
 		position = Vector2.ZERO
+		velocity = Vector2.ZERO
 		$Animations.play("death")
