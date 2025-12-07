@@ -21,14 +21,15 @@ func _process(delta) -> void:
 		velocity.y += get_gravity().y * delta
 	if is_on_floor() or current_coyote_time > 0.:
 		if Input.is_action_just_pressed("jump"):
+			current_coyote_time = 0
 			var jump_strength = min(jump_conversion*abs(velocity.x), max_jump_strength-min_jump_strength)
 			velocity.y -= jump_strength+min_jump_strength
 			velocity.x -= jump_strength*sign(velocity.x)
 	if velocity.length_squared() > speed_cap**2:
 		velocity = velocity.normalized()*speed_cap
 	$Sprite.speed_scale = (velocity.x/speed_cap)*max_run_anim_speed
-	move_and_slide()
 	if position.y > 1000: # placeholder for death condition
 		position = Vector2.ZERO
 		velocity = Vector2.ZERO
 		$Animations.play("death")
+	move_and_slide()
