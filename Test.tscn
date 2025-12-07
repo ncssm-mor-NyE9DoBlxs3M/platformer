@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=4 uid="uid://c335c8riw6c0j"]
+[gd_scene load_steps=6 format=4 uid="uid://c335c8riw6c0j"]
 
 [ext_resource type="Texture2D" uid="uid://cekvn3ht1cx5k" path="res://assets/prototype_tiles.png" id="1_njov2"]
 [ext_resource type="PackedScene" uid="uid://d2la8or3pq5np" path="res://Player.tscn" id="2_2au82"]
+[ext_resource type="AudioStream" uid="uid://b8x6toeasf0qx" path="res://assets/placeholder_music.wav" id="3_2au82"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8tn2x"]
 texture = ExtResource("1_njov2")
@@ -399,3 +400,7 @@ tile_map_data = PackedByteArray("AAD8/wAAAAABAAAAAAD9/wAAAAABAAAAAAD+/wAAAAABAAA
 tile_set = SubResource("TileSet_aq4fw")
 
 [node name="Player" parent="." instance=ExtResource("2_2au82")]
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_2au82")
+autoplay = true
