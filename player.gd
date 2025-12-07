@@ -3,6 +3,8 @@ extends CharacterBody2D
 const speed_cap: float = 1000.
 const accel_rate: float = 500.
 const decel_rate: float = 900.
+const air_accel_rate: float = 100.
+const air_decel_rate: float = 250.
 const min_jump_strength: float = 150.
 const max_jump_strength: float = 300.
 const coyote_time: float = .2
@@ -12,9 +14,11 @@ var current_coyote_time: float
 const max_run_anim_speed: float = 50.
 
 func _process(delta) -> void:
-	var input := Vector2(Input.get_axis("left", "right"), 0)
+	var input := Input.get_axis("left", "right")
+	var horiz_delta: float = ((accel_rate if is_on_floor() else air_accel_rate) if (Vector2(input, 0).dot(velocity) > 0) else (decel_rate if is_on_floor() else air_decel_rate))*delta
+	var target := input*speed_cap
+	velocity.x = target if (abs(target-velocity.x) <= horiz_delta) else (velocity.x + sign(target-velocity.x) * horiz_delta)
 	if is_on_floor():
-		velocity = velocity.move_toward(input*speed_cap, (accel_rate if (input.dot(velocity) > 0) else decel_rate)*delta)
 		current_coyote_time = coyote_time
 	else:
 		current_coyote_time = max(0, current_coyote_time-delta)
