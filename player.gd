@@ -3,12 +3,12 @@ extends CharacterBody2D
 const speed_cap: float = 1000.
 const accel_rate: float = 500.
 const decel_rate: float = 900.
-const air_accel_rate: float = 100.
-const air_decel_rate: float = 250.
-const min_jump_strength: float = 150.
-const max_jump_strength: float = 300.
+@export var air_accel_rate: float = 200.
+@export var air_decel_rate: float = 400.
+const min_jump_strength: float = 0
+const max_jump_strength: float = INF
 const coyote_time: float = .2
-const jump_conversion: float = .5
+const jump_conversion: float = 1
 var current_coyote_time: float
 
 const max_run_anim_speed: float = 50.
