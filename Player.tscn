@@ -99,19 +99,19 @@ position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_e80uo")
 animation = &"run"
 autoplay = "run"
-frame_progress = 0.88008434
+frame_progress = 0.42478716
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, -16)
 shape = SubResource("RectangleShape2D_kne1u")
 
 [node name="Camera" type="Camera2D" parent="."]
+position = Vector2(0, -16)
 zoom = Vector2(2, 2)
 
 [node name="DeathScreen" type="Sprite2D" parent="Camera"]
 modulate = Color(1, 1, 1, 0)
-position = Vector2(0.9999962, 0.99998665)
-scale = Vector2(1.0881355, 0.9354005)
+scale = Vector2(1.1, 0.943)
 texture = ExtResource("3_e80uo")
 
 [node name="DeathSound" type="AudioStreamPlayer" parent="Camera"]
