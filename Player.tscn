@@ -93,7 +93,6 @@ _data = {
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_kpjcp")
-decel_rate = 500.0
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -16)
@@ -108,7 +107,7 @@ shape = SubResource("RectangleShape2D_kne1u")
 
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2(0, -16)
-zoom = Vector2(1.5, 1.5)
+zoom = Vector2(2, 2)
 
 [node name="DeathScreen" type="Sprite2D" parent="Camera"]
 modulate = Color(1, 1, 1, 0)
