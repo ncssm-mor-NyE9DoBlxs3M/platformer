@@ -33,7 +33,13 @@ func _process(delta) -> void:
 			velocity.x -= jump_strength*sign(velocity.x)
 	if velocity.length_squared() > speed_cap**2:
 		velocity = velocity.normalized()*speed_cap
-	$Sprite.speed_scale = (velocity.x/speed_cap)*max_run_anim_speed
+	if velocity.x != 0:
+		$Sprite.play("run" if sign(input)==sign(velocity.x) else "stop")
+		$Sprite.speed_scale = max(10,abs(velocity.x)/15.)
+		$Sprite.flip_h = sign(velocity.x)==-1
+	else:
+		$Sprite.play("idle")
+		$Sprite.speed_scale = 5
 	if position.y > 1000: # placeholder for death condition
 		position = Vector2.ZERO
 		velocity = Vector2.ZERO
