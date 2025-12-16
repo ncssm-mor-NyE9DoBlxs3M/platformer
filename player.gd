@@ -12,10 +12,11 @@ extends CharacterBody2D
 @export var jump_conversion: float = .5
 @export_group("Animation")
 @export var max_run_anim_speed: float = 50.
+@export var max_step_height: float = 10
 
 var current_coyote_time: float
 
-func _process(delta) -> void:
+func _physics_process(delta) -> void:
 	var input := Input.get_axis("left", "right")
 	var horiz_delta: float = ((accel_rate if is_on_floor() else air_accel_rate) if (Vector2(input, 0).dot(velocity) > 0) else (decel_rate if is_on_floor() else air_decel_rate))*delta
 	var target := input*speed_cap
@@ -33,6 +34,18 @@ func _process(delta) -> void:
 			velocity.x -= jump_strength*sign(velocity.x)
 	if velocity.length_squared() > speed_cap**2:
 		velocity = velocity.normalized()*speed_cap
+	var stair_check := KinematicCollision2D.new()
+	var horizontal_movement := Vector2(velocity.x*delta, 0)
+	if test_move(transform, horizontal_movement, stair_check):
+		var ray := PhysicsRayQueryParameters2D.create(
+			Vector2(stair_check.get_position().x, position.y) + stair_check.get_remainder() - Vector2(0, max_step_height),
+			Vector2(stair_check.get_position().x, position.y) + stair_check.get_remainder(),
+		collision_mask, [self])
+		var step = get_world_2d().direct_space_state.intersect_ray(ray).get("position")
+		if step != null:
+			var step_height: float = step.y - position.y - safe_margin
+			if !test_move(transform.translated(Vector2(0, step_height)), horizontal_movement):
+				position.y += step_height
 	if velocity.x != 0:
 		$Sprite.play("run" if sign(input)==sign(velocity.x) else "stop")
 		$Sprite.speed_scale = max(10,abs(velocity.x)/15.)

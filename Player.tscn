@@ -163,6 +163,10 @@ autoplay = "idle"
 position = Vector2(0.5, -11.5)
 shape = SubResource("RectangleShape2D_kne1u")
 
+[node name="Line2D" type="Line2D" parent="."]
+points = PackedVector2Array(0, 0, 0, 0)
+width = 2.0
+
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2(0, -16)
 zoom = Vector2(2, 2)
