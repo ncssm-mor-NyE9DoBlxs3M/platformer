@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://d2la8or3pq5np"]
+[gd_scene load_steps=22 format=3 uid="uid://d2la8or3pq5np"]
 
 [ext_resource type="Script" uid="uid://bl4rrxrfbc8jx" path="res://player.gd" id="1_kpjcp"]
 [ext_resource type="Texture2D" uid="uid://ds2axpy5m3eme" path="res://assets/character.png" id="2_e80uo"]
@@ -89,6 +89,27 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kne1u"]
 size = Vector2(15, 23)
 
+[sub_resource type="Curve" id="Curve_e80uo"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.25, 1), 0.0, 0.0, 0, 0, Vector2(0.99999, 0), -3.2138388, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_cxr5p"]
+curve = SubResource("Curve_e80uo")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_e80uo"]
+lifetime_randomness = 1.0
+particle_flag_disable_z = true
+particle_flag_damping_as_friction = true
+emission_shape_offset = Vector3(0, 1, 0)
+emission_shape = 3
+emission_box_extents = Vector3(4, 0, 0)
+inherit_velocity_ratio = 0.25
+gravity = Vector3(0, 0, 0)
+damping_min = 1.0
+damping_max = 10.0
+scale_max = 3.0
+scale_curve = SubResource("CurveTexture_cxr5p")
+
 [sub_resource type="Animation" id="Animation_cxr5p"]
 length = 0.001
 tracks/0/type = "value"
@@ -163,13 +184,16 @@ autoplay = "idle"
 position = Vector2(0.5, -11.5)
 shape = SubResource("RectangleShape2D_kne1u")
 
-[node name="Line2D" type="Line2D" parent="."]
-points = PackedVector2Array(0, 0, 0, 0)
-width = 2.0
+[node name="JumpEffect" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 32
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_e80uo")
 
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2(0, -16)
-zoom = Vector2(2, 2)
 
 [node name="DeathScreen" type="Sprite2D" parent="Camera"]
 modulate = Color(1, 1, 1, 0)

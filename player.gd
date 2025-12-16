@@ -15,6 +15,7 @@ extends CharacterBody2D
 @export var max_step_height: float = 10
 
 var current_coyote_time: float
+var facing_left: bool = false
 
 func _physics_process(delta) -> void:
 	var input := Input.get_axis("left", "right")
@@ -32,24 +33,27 @@ func _physics_process(delta) -> void:
 			var jump_strength = min(jump_conversion*abs(velocity.x), max_jump_strength-min_jump_strength)
 			velocity.y -= jump_strength+min_jump_strength
 			velocity.x -= jump_strength*sign(velocity.x)
+			$JumpEffect.restart()
 	if velocity.length_squared() > speed_cap**2:
 		velocity = velocity.normalized()*speed_cap
-	var stair_check := KinematicCollision2D.new()
-	var horizontal_movement := Vector2(velocity.x*delta, 0)
-	if test_move(transform, horizontal_movement, stair_check):
-		var ray := PhysicsRayQueryParameters2D.create(
-			Vector2(stair_check.get_position().x, position.y) + stair_check.get_remainder() - Vector2(0, max_step_height),
-			Vector2(stair_check.get_position().x, position.y) + stair_check.get_remainder(),
-		collision_mask, [self])
-		var step = get_world_2d().direct_space_state.intersect_ray(ray).get("position")
-		if step != null:
-			var step_height: float = step.y - position.y - safe_margin
-			if !test_move(transform.translated(Vector2(0, step_height)), horizontal_movement):
-				position.y += step_height
+	if velocity.y <= 0:
+		var stair_check := KinematicCollision2D.new()
+		var horizontal_movement := Vector2(velocity.x*delta, 0)
+		if test_move(transform, horizontal_movement, stair_check):
+			var ray := PhysicsRayQueryParameters2D.create(
+				Vector2(stair_check.get_position().x, position.y) + stair_check.get_remainder() - Vector2(0, max_step_height),
+				Vector2(stair_check.get_position().x, position.y) + stair_check.get_remainder(),
+			collision_mask, [self])
+			var step = get_world_2d().direct_space_state.intersect_ray(ray).get("position")
+			if step != null:
+				var step_height: float = step.y - position.y - safe_margin
+				if !test_move(transform.translated(Vector2(0, step_height)), horizontal_movement):
+					position.y += step_height
 	if velocity.x != 0:
 		$Sprite.play("run" if sign(input)==sign(velocity.x) else "stop")
 		$Sprite.speed_scale = max(10,abs(velocity.x)/15.)
-		$Sprite.flip_h = sign(velocity.x)==-1
+		facing_left = sign(velocity.x) == -1
+		$Sprite.flip_h = facing_left
 	else:
 		$Sprite.play("idle")
 		$Sprite.speed_scale = 5
