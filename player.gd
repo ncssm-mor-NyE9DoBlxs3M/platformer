@@ -58,8 +58,14 @@ func _physics_process(delta) -> void:
 		$Sprite.play("idle")
 		$Sprite.speed_scale = 5
 	if position.y > 1000: # placeholder for death condition
-		position = Vector2.ZERO
-		velocity = Vector2.ZERO
-		$Animations.play("death")
+		die()
 	move_and_slide()
 	$SpeedSFX.pitch_scale = clamp(velocity.length()/500., 0.21, 2) # 0.21 roughly matches up with the idle animation
+
+func _on_hurtbox_body_entered(_body: Node2D) -> void:
+	die()
+
+func die() -> void:
+	position = Vector2.ZERO
+	velocity = Vector2.ZERO
+	$Animations.play("death")
