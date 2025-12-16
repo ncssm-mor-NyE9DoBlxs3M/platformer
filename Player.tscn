@@ -1,9 +1,10 @@
-[gd_scene load_steps=22 format=3 uid="uid://d2la8or3pq5np"]
+[gd_scene load_steps=23 format=3 uid="uid://d2la8or3pq5np"]
 
 [ext_resource type="Script" uid="uid://bl4rrxrfbc8jx" path="res://player.gd" id="1_kpjcp"]
 [ext_resource type="Texture2D" uid="uid://ds2axpy5m3eme" path="res://assets/character.png" id="2_e80uo"]
 [ext_resource type="Texture2D" uid="uid://beu3rgdv660cn" path="res://assets/late_for_check.png" id="3_e80uo"]
 [ext_resource type="AudioStream" uid="uid://b60ug8s68ecjn" path="res://assets/youve_got_a_minor.wav" id="4_cxr5p"]
+[ext_resource type="AudioStream" uid="uid://b0ds0sfgweikk" path="res://assets/speed.wav" id="5_cxr5p"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_e80uo"]
 atlas = ExtResource("2_e80uo")
@@ -207,3 +208,8 @@ stream = ExtResource("4_cxr5p")
 libraries = {
 &"": SubResource("AnimationLibrary_tdg3f")
 }
+
+[node name="SpeedSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_cxr5p")
+volume_db = 10.0
+autoplay = true

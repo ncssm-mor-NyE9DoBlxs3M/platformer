@@ -62,3 +62,4 @@ func _physics_process(delta) -> void:
 		velocity = Vector2.ZERO
 		$Animations.play("death")
 	move_and_slide()
+	$SpeedSFX.pitch_scale = clamp(velocity.length()/500., 0.21, 2) # 0.21 roughly matches up with the idle animation
