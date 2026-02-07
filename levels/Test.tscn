@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bgwnetgji26s" path="res://assets/darkness.png" id="3_vub2e"]
 [ext_resource type="PackedScene" uid="uid://d2la8or3pq5np" path="res://Player.tscn" id="4_tqj0n"]
 [ext_resource type="AudioStream" uid="uid://b8x6toeasf0qx" path="res://assets/placeholder_music.wav" id="5_sdgsj"]
-[ext_resource type="PackedScene" path="res://checkpoint.tscn" id="6_yqpgv"]
+[ext_resource type="PackedScene" uid="uid://ovb7okimhf78" path="res://checkpoint.tscn" id="6_yqpgv"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8tn2x"]
 texture = ExtResource("2_yqpgv")
@@ -430,4 +430,4 @@ autoplay = true
 
 [node name="Area2D" parent="." unique_id=1155142488 instance=ExtResource("6_yqpgv")]
 position = Vector2(1447, -199.99998)
-scale = Vector2(0.13437545, 0.13437545)
+scale = Vector2(0.13597777, 0.13509044)
