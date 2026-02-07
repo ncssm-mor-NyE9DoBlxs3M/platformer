@@ -415,7 +415,7 @@ sources/1 = SubResource("TileSetAtlasSource_aq4fw")
 
 [node name="Test" type="Node2D" unique_id=28049306]
 script = ExtResource("1_4qglm")
-level_time = 5.0
+level_time = 30.0
 
 [node name="Tiles" type="TileMapLayer" parent="." unique_id=1247896836]
 position = Vector2(1, 0)
