@@ -70,6 +70,7 @@ func _on_hurtbox_body_entered(_body: Node2D) -> void:
 func _on_hurtbox_area_entered(area: Area2D) -> void:
 	if area is Checkpoint:
 		respawn_pos = area.position
+		area.activate()
 
 func die() -> void:
 	position = respawn_pos

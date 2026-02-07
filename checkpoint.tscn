@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://ir246ok83kw4" path="res://assets/checkpoint.png" id="1_luqgl"]
 [ext_resource type="Script" uid="uid://b1guyjotj2akg" path="res://checkpoint.gd" id="1_r6hke"]
+[ext_resource type="AudioStream" uid="uid://dn2fh0op7npej" path="res://assets/checkpoint.wav" id="3_tnhlw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_luqgl"]
 size = Vector2(224, 224)
@@ -16,3 +17,7 @@ shape = SubResource("RectangleShape2D_luqgl")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=621973089]
 texture = ExtResource("1_luqgl")
+
+[node name="Sound" type="AudioStreamPlayer2D" parent="." unique_id=1789780729]
+stream = ExtResource("3_tnhlw")
+volume_db = 24.0
