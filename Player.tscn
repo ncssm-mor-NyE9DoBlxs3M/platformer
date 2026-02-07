@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://d2la8or3pq5np"]
+[gd_scene format=3 uid="uid://d2la8or3pq5np"]
 
 [ext_resource type="Script" uid="uid://bl4rrxrfbc8jx" path="res://player.gd" id="1_kpjcp"]
 [ext_resource type="Texture2D" uid="uid://ds2axpy5m3eme" path="res://assets/character.png" id="2_e80uo"]
@@ -175,21 +175,21 @@ _data = {
 &"death": SubResource("Animation_e80uo")
 }
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" unique_id=1205682914]
 collision_layer = 0
 script = ExtResource("1_kpjcp")
 
-[node name="Sprite" type="AnimatedSprite2D" parent="."]
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1262533730]
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_e80uo")
 animation = &"stop"
 autoplay = "idle"
 
-[node name="Collision" type="CollisionShape2D" parent="."]
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=1642818336]
 position = Vector2(0.5, -11.5)
 shape = SubResource("RectangleShape2D_kne1u")
 
-[node name="JumpEffect" type="GPUParticles2D" parent="."]
+[node name="JumpEffect" type="GPUParticles2D" parent="." unique_id=1338851024]
 emitting = false
 amount = 32
 lifetime = 0.5
@@ -197,33 +197,31 @@ one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_e80uo")
 
-[node name="Hurtbox" type="Area2D" parent="."]
+[node name="Hurtbox" type="Area2D" parent="." unique_id=1040500378]
 collision_layer = 0
 collision_mask = 2
 input_pickable = false
 
-[node name="Collision" type="CollisionShape2D" parent="Hurtbox"]
+[node name="Collision" type="CollisionShape2D" parent="Hurtbox" unique_id=2110098092]
 position = Vector2(0.5, -11.5)
 shape = SubResource("RectangleShape2D_cxr5p")
 
-[node name="Camera" type="Camera2D" parent="."]
+[node name="Camera" type="Camera2D" parent="." unique_id=1731644018]
 position = Vector2(0, -16)
 
-[node name="DeathScreen" type="Sprite2D" parent="Camera"]
+[node name="DeathScreen" type="Sprite2D" parent="Camera" unique_id=275359214]
 modulate = Color(1, 1, 1, 0)
 position = Vector2(1, -5)
 scale = Vector2(1.1, 0.943)
 texture = ExtResource("3_e80uo")
 
-[node name="DeathSound" type="AudioStreamPlayer" parent="Camera"]
+[node name="DeathSound" type="AudioStreamPlayer" parent="Camera" unique_id=1203373155]
 stream = ExtResource("4_cxr5p")
 
-[node name="Animations" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_tdg3f")
-}
+[node name="Animations" type="AnimationPlayer" parent="." unique_id=568795726]
+libraries/ = SubResource("AnimationLibrary_tdg3f")
 
-[node name="SpeedSFX" type="AudioStreamPlayer2D" parent="."]
+[node name="SpeedSFX" type="AudioStreamPlayer2D" parent="." unique_id=903354039]
 stream = ExtResource("5_cxr5p")
 volume_db = 10.0
 autoplay = true
