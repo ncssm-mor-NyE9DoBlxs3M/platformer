@@ -14,3 +14,4 @@ func _ready():
 func time_out() -> void:
 	timer.start()
 	$Player.die()
+	
