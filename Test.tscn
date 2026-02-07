@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://d2la8or3pq5np" path="res://Player.tscn" id="2_2au82"]
 [ext_resource type="Texture2D" uid="uid://bgwnetgji26s" path="res://assets/darkness.png" id="2_8tn2x"]
 [ext_resource type="AudioStream" uid="uid://b8x6toeasf0qx" path="res://assets/placeholder_music.wav" id="3_2au82"]
+[ext_resource type="PackedScene" uid="uid://bwr0yheybxesi" path="res://checkpoint.tscn" id="5_aq4fw"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8tn2x"]
 texture = ExtResource("1_njov2")
@@ -419,7 +420,16 @@ tile_map_data = PackedByteArray("AAD8/wAAAAABAAAAAAD9/wAAAAABAAAAAAD+/wAAAAABAAA
 tile_set = SubResource("TileSet_aq4fw")
 
 [node name="Player" parent="." unique_id=263793672 instance=ExtResource("2_2au82")]
+collision_layer = 128
 
 [node name="Music" type="AudioStreamPlayer" parent="." unique_id=279181697]
 stream = ExtResource("3_2au82")
 autoplay = true
+
+[node name="Area2D" parent="." unique_id=1155142488 instance=ExtResource("5_aq4fw")]
+position = Vector2(1523, -188)
+scale = Vector2(0.08000002, 0.08000002)
+collision_layer = 0
+collision_mask = 128
+
+[connection signal="body_entered" from="Area2D" to="Player" method="_on_area_2d_body_entered"]

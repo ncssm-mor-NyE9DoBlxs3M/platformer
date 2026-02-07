@@ -176,7 +176,7 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D" unique_id=1205682914]
-collision_layer = 0
+collision_layer = 128
 script = ExtResource("1_kpjcp")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1262533730]
