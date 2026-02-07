@@ -1,4 +1,4 @@
-extends CharacterBody2D
+class_name Player extends CharacterBody2D
 
 @export_group("Movement")
 @export var speed_cap: float = 1000.
@@ -16,6 +16,8 @@ extends CharacterBody2D
 
 var current_coyote_time: float
 var facing_left: bool = false
+
+var respawn_pos: Vector2 = Vector2.ZERO
 
 func _physics_process(delta) -> void:
 	var input := Input.get_axis("left", "right")
@@ -66,6 +68,12 @@ func _on_hurtbox_body_entered(_body: Node2D) -> void:
 	die()
 
 func die() -> void:
-	position = Vector2.ZERO
+	position = respawn_pos
 	velocity = Vector2.ZERO
 	$Animations.play("death")
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body is Player:
+		print("checkpoint touched")
+		respawn_pos = self.position
