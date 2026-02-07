@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Platformer"
-run/main_scene="uid://c335c8riw6c0j"
+run/main_scene="uid://bpmrvciu2q13f"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 
 [display]
