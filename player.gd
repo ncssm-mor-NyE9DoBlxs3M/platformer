@@ -17,7 +17,8 @@ class_name Player extends CharacterBody2D
 var current_coyote_time: float
 var facing_left: bool = false
 
-var respawn_pos: Vector2 = Vector2.ZERO
+@onready var initial_pos: Vector2 = position
+@onready var respawn_pos: Vector2 = initial_pos
 
 func _physics_process(delta) -> void:
 	var input := Input.get_axis("left", "right")
@@ -76,3 +77,6 @@ func die() -> void:
 	position = respawn_pos
 	velocity = Vector2.ZERO
 	$Animations.play("death")
+
+func reset_spawn() -> void:
+	respawn_pos = initial_pos
