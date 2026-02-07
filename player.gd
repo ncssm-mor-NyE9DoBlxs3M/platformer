@@ -67,13 +67,11 @@ func _physics_process(delta) -> void:
 func _on_hurtbox_body_entered(_body: Node2D) -> void:
 	die()
 
+func _on_hurtbox_area_entered(area: Area2D) -> void:
+	if area is Checkpoint:
+		respawn_pos = area.position
+
 func die() -> void:
 	position = respawn_pos
 	velocity = Vector2.ZERO
 	$Animations.play("death")
-
-
-func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body is Player:
-		print("checkpoint touched")
-		respawn_pos = self.position

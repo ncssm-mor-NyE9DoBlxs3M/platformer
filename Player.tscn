@@ -176,7 +176,7 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D" unique_id=1205682914]
-collision_layer = 128
+collision_layer = 0
 script = ExtResource("1_kpjcp")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1262533730]
@@ -199,7 +199,7 @@ process_material = SubResource("ParticleProcessMaterial_e80uo")
 
 [node name="Hurtbox" type="Area2D" parent="." unique_id=1040500378]
 collision_layer = 0
-collision_mask = 2
+collision_mask = 130
 input_pickable = false
 
 [node name="Collision" type="CollisionShape2D" parent="Hurtbox" unique_id=2110098092]
@@ -226,4 +226,5 @@ stream = ExtResource("5_cxr5p")
 volume_db = 10.0
 autoplay = true
 
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
