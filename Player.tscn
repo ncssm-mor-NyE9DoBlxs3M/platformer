@@ -207,7 +207,7 @@ position = Vector2(0.5, -11.5)
 shape = SubResource("RectangleShape2D_cxr5p")
 
 [node name="Camera" type="Camera2D" parent="." unique_id=1731644018]
-position = Vector2(0, -16)
+position = Vector2(0, -109)
 
 [node name="DeathScreen" type="Sprite2D" parent="Camera" unique_id=275359214]
 modulate = Color(1, 1, 1, 0)
