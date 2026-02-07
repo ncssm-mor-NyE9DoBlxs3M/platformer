@@ -9,3 +9,8 @@ func _ready():
 	add_child(timer)
 	timer.wait_time = level_time
 	timer.start()
+	timer.timeout.connect(time_out)
+
+func time_out() -> void:
+	timer.start()
+	$Player.die()
