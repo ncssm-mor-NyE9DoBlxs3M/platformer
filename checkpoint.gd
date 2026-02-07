@@ -5,5 +5,6 @@ func activate() -> void:
 	$Sound.play()
 	var tween := get_tree().create_tween()
 	tween.tween_property($Sprite2D, "modulate", Color.TRANSPARENT, 1.)
+	tween.parallel().tween_property($Glow, "modulate", Color.TRANSPARENT, 1.)
 	await tween.finished
 	queue_free()
