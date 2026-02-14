@@ -80,3 +80,8 @@ func die() -> void:
 
 func reset_spawn() -> void:
 	respawn_pos = initial_pos
+# Admin Keys!
+# F1 to KYS
+func _process(_delta):
+	if Input.is_action_just_pressed("kill"):  # Remap "kill" to F1 in Project Settings > Input Map
+		die()
