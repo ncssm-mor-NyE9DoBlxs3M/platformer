@@ -76,3 +76,9 @@ func die() -> void:
 	position = respawn_pos
 	velocity = Vector2.ZERO
 	$Animations.play("death")
+
+# Admin Keys!
+# F1 to KYS
+func _process(_delta):
+	if Input.is_action_just_pressed("kill"):  # Remap "kill" to F1 in Project Settings > Input Map
+		die()
