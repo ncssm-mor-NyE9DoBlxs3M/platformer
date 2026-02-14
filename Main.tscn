@@ -29,5 +29,4 @@ offset_left = -27.5
 offset_right = 27.5
 offset_bottom = 23.0
 grow_horizontal = 2
-text = "111111"
 label_settings = SubResource("LabelSettings_cm0pq")
