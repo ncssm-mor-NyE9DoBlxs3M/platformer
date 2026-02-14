@@ -9,8 +9,14 @@ func _ready() -> void:
 func _on_button_hover(node: NodePath) -> void:
 	get_node(node).grab_focus()
 
-func _ready() -> void:
-	$Game.add_child(level)
+func load_level(scene: PackedScene) -> Level:
+	var new_level = scene.instantiate()
+	$Game.add_child(new_level)
+	new_level.timeout.connect(func ():
+		level.queue_free()
+		level = load_level(scene)
+	)
+	return new_level
 
 func _process(_delta: float) -> void:
 	if level:

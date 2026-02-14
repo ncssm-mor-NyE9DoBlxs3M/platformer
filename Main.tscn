@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bpmrvciu2q13f"]
 
 [ext_resource type="Script" uid="uid://c5dic766n4yub" path="res://main.gd" id="1_glv2v"]
-[ext_resource type="PackedScene" uid="uid://c335c8riw6c0j" path="res://levels/Test.tscn" id="2_uu6xs"]
+[ext_resource type="PackedScene" uid="uid://dlmqdajdor60m" path="res://levels/Test.tscn" id="2_uu6xs"]
 [ext_resource type="FontFile" uid="uid://csaeh8aw3a2u6" path="res://assets/timerfont.png" id="3_r0du0"]
 [ext_resource type="Texture2D" uid="uid://bkstopupe0d0y" path="res://assets/photo/title.jpeg" id="4_cm0pq"]
 
@@ -122,7 +122,5 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_trn2v")
 text = "QUIT"
 flat = true
 
-[connection signal="mouse_entered" from="UI/MainMenu/Menu/Play" to="." method="_on_button_hover" binds= [NodePath("UI/MainMenu/Menu/Play")]]
 [connection signal="pressed" from="UI/MainMenu/Menu/Play" to="." method="_on_play_pressed"]
-[connection signal="mouse_entered" from="UI/MainMenu/Menu/Quit" to="." method="_on_button_hover" binds= [NodePath("UI/MainMenu/Menu/Quit")]]
 [connection signal="pressed" from="UI/MainMenu/Menu/Quit" to="." method="_on_quit_pressed"]
