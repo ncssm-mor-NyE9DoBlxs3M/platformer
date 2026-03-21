@@ -30,6 +30,8 @@ func _physics_process(delta) -> void:
 	else:
 		current_coyote_time = max(0, current_coyote_time-delta)
 		velocity.y += get_gravity().y * delta
+		if Input.is_action_just_pressed("down"):
+			velocity = Vector2(velocity.x/2., abs(velocity.y)+abs(velocity.x/2.))
 	if is_on_floor() or current_coyote_time > 0.:
 		if Input.is_action_pressed("jump"):
 			current_coyote_time = 0
