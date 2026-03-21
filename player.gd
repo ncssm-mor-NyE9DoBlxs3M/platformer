@@ -1,5 +1,6 @@
 class_name Player extends CharacterBody2D
 
+@export var has_keys: bool = true
 @export_group("Movement")
 @export var speed_cap: float = 1000.
 @export var accel_rate: float = 500.
@@ -55,17 +56,19 @@ func _physics_process(delta) -> void:
 				if !test_move(transform.translated(Vector2(0, step_height)), horizontal_movement):
 					position.y += step_height
 	if velocity.x != 0:
-		$Sprite.play("run" if sign(input)==sign(velocity.x) else "stop")
+		$Sprite.play(("run" if sign(input)==sign(velocity.x) else "stop")+("_keys" if has_keys else ""))
 		$Sprite.speed_scale = max(10,abs(velocity.x)/15.)
 		facing_left = sign(velocity.x) == -1
 		$Sprite.flip_h = facing_left
+		$Sparkles.position.x = 2.*sign(velocity.x)
 	else:
-		$Sprite.play("idle")
+		$Sprite.play("idle"+("_keys" if has_keys else ""))
 		$Sprite.speed_scale = 5
 	if position.y > 1000: # placeholder for death condition
 		die()
 	move_and_slide()
 	$SpeedSFX.pitch_scale = clamp(velocity.length()/500., 0.21, 2) # 0.21 roughly matches up with the idle animation
+	$Sparkles.amount_ratio = 0.25+clamp(velocity.length()/1500., 0., .75)
 
 func _on_hurtbox_body_entered(_body: Node2D) -> void:
 	die()
