@@ -14,3 +14,4 @@ func unlock() -> void:
 
 func lock() -> void:
 	collision.set_deferred("disabled", false)
+	sprite.play("default")
