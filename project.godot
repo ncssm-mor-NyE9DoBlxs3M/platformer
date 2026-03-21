@@ -14,6 +14,10 @@ config/name="Platformer"
 run/main_scene="uid://bpmrvciu2q13f"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 
+[autoload]
+
+Events="*uid://cx0fk8sgo4n6m"
+
 [display]
 
 window/size/viewport_width=640

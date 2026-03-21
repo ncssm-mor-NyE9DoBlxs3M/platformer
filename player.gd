@@ -1,6 +1,6 @@
 class_name Player extends CharacterBody2D
 
-@export var has_keys: bool = true
+@export var start_with_keys: bool = true
 @export_group("Movement")
 @export var speed_cap: float = 1000.
 @export var accel_rate: float = 500.
@@ -17,9 +17,13 @@ class_name Player extends CharacterBody2D
 
 var current_coyote_time: float
 var facing_left: bool = false
+@onready var has_keys := start_with_keys
 
 @onready var initial_pos: Vector2 = position
 @onready var respawn_pos: Vector2 = initial_pos
+
+func _ready() -> void:
+	Events.reset_level.connect(reset)
 
 func _physics_process(delta) -> void:
 	var input := Input.get_axis("left", "right")
@@ -66,6 +70,7 @@ func _physics_process(delta) -> void:
 		$Sprite.speed_scale = 5
 	if position.y > 1000: # placeholder for death condition
 		die()
+	if has_keys: door_check(delta)
 	move_and_slide()
 	$SpeedSFX.pitch_scale = clamp(velocity.length()/500., 0.21, 2) # 0.21 roughly matches up with the idle animation
 	$Sparkles.amount_ratio = 0.25+clamp(velocity.length()/1500., 0., .75)
@@ -82,9 +87,17 @@ func die() -> void:
 	position = respawn_pos
 	velocity = Vector2.ZERO
 	$Animations.play("death")
+	Events.player_died.emit()
 
-func reset_spawn() -> void:
+func reset() -> void:
 	respawn_pos = initial_pos
+	has_keys = start_with_keys
+	die()
+
+func door_check(delta: float) -> void:
+	var result := KinematicCollision2D.new()
+	if test_move(transform, velocity*delta, result) and result.get_collider() is Door:
+		result.get_collider().unlock()
 # Admin Keys!
 # F1 to KYS
 func _process(_delta):

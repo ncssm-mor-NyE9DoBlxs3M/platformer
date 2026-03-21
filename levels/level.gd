@@ -2,8 +2,7 @@ class_name Level extends Node2D
 
 ## The time limit for the level in seconds.
 @export var level_time: float
-
-signal timeout
+@export var player: Player
 
 var timer: Timer
 func _ready():
@@ -11,4 +10,4 @@ func _ready():
 	add_child(timer)
 	timer.wait_time = level_time
 	timer.start()
-	timer.timeout.connect(timeout.emit)
+	timer.timeout.connect(Events.reset_level.emit)

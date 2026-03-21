@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://th1fk5f6pn1f"]
+
+[ext_resource type="Script" uid="uid://bhjhr335c6bmv" path="res://objects/door.gd" id="1_fjie8"]
+[ext_resource type="AudioStream" uid="uid://c1mg52c34rh6o" path="res://assets/lesser_door.wav" id="2_40bpm"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_40bpm"]
+a = Vector2(0, -16)
+b = Vector2(0, 16)
+
+[node name="LesserDoor" type="StaticBody2D" unique_id=1468690797 node_paths=PackedStringArray("sound", "collision")]
+collision_layer = 5
+collision_mask = 0
+script = ExtResource("1_fjie8")
+sound = NodePath("Sound")
+collision = NodePath("Collision")
+
+[node name="Collision" type="CollisionShape2D" parent="." unique_id=850098506]
+position = Vector2(0, -16)
+shape = SubResource("SegmentShape2D_40bpm")
+
+[node name="Sound" type="AudioStreamPlayer2D" parent="." unique_id=2118765750]
+stream = ExtResource("2_40bpm")
