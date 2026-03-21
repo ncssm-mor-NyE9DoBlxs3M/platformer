@@ -73,7 +73,7 @@ func _physics_process(delta) -> void:
 	if has_keys: door_check(delta)
 	move_and_slide()
 	$SpeedSFX.pitch_scale = clamp(velocity.length()/500., 0.21, 2) # 0.21 roughly matches up with the idle animation
-	$Sparkles.amount_ratio = 0.25+clamp(velocity.length()/1500., 0., .75)
+	$Sparkles.amount_ratio = (0.25+clamp(velocity.length()/1500., 0., .75))*int(has_keys)
 
 func _on_hurtbox_body_entered(_body: Node2D) -> void:
 	die()

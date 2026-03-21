@@ -1,18 +1,69 @@
 [gd_scene format=3 uid="uid://4sq8urqmmaxd"]
 
 [ext_resource type="Script" uid="uid://bhjhr335c6bmv" path="res://objects/door.gd" id="1_v2kpw"]
+[ext_resource type="Texture2D" uid="uid://b1i6i1romj65g" path="res://assets/greater_door.png" id="2_alrxb"]
 [ext_resource type="AudioStream" uid="uid://bivtxwjpet5wc" path="res://assets/greater_door.wav" id="2_v2kpw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mwp1r"]
+atlas = ExtResource("2_alrxb")
+region = Rect2(0, 0, 44, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_upy87"]
+atlas = ExtResource("2_alrxb")
+region = Rect2(0, 0, 44, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lkedj"]
+atlas = ExtResource("2_alrxb")
+region = Rect2(44, 0, 44, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3gy80"]
+atlas = ExtResource("2_alrxb")
+region = Rect2(88, 0, 44, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_secnu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mwp1r")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_upy87")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lkedj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3gy80")
+}],
+"loop": false,
+"name": &"open",
+"speed": 10.0
+}]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_40bpm"]
 a = Vector2(0, -32)
 b = Vector2(0, 32)
 
-[node name="GreaterDoor" type="StaticBody2D" unique_id=1468690797 node_paths=PackedStringArray("sound", "collision")]
+[node name="GreaterDoor" type="StaticBody2D" unique_id=1468690797 node_paths=PackedStringArray("sound", "collision", "sprite")]
 collision_layer = 5
 collision_mask = 0
 script = ExtResource("1_v2kpw")
 sound = NodePath("Sound")
 collision = NodePath("Collision")
+sprite = NodePath("Sprite")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1766336965]
+position = Vector2(-16, -32)
+sprite_frames = SubResource("SpriteFrames_secnu")
+animation = &"open"
+autoplay = "default"
+frame = 2
+frame_progress = 1.0
 
 [node name="Collision" type="CollisionShape2D" parent="." unique_id=850098506]
 position = Vector2(0, -32)
