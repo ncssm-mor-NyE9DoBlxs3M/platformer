@@ -16,7 +16,7 @@ config/features=PackedStringArray("4.6", "GL Compatibility")
 
 [autoload]
 
-Events="*uid://cx0fk8sgo4n6m"
+Events="*res://events.gd"
 
 [display]
 
