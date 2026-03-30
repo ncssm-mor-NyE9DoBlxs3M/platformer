@@ -15,11 +15,10 @@
 [ext_resource type="Texture2D" uid="uid://dyhwf0fi8ymd2" path="res://assets/dark_wall.png" id="10_c2igu"]
 [ext_resource type="PackedScene" uid="uid://th1fk5f6pn1f" path="res://objects/LesserDoor.tscn" id="10_j5w31"]
 [ext_resource type="PackedScene" uid="uid://4sq8urqmmaxd" path="res://objects/GreaterDoor.tscn" id="11_lvc3g"]
+[ext_resource type="Texture2D" uid="uid://lsrknwah787e" path="res://assets/basketball.png" id="11_xrt5x"]
 [ext_resource type="PackedScene" uid="uid://xqpxpgkf727i" path="res://objects/Key.tscn" id="16_c2igu"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_c2igu"]
-[ext_resource type="Texture2D" uid="uid://lsrknwah787e" path="res://assets/basketball.png" id="11_xrt5x"]
-[ext_resource type="FontFile" uid="uid://csaeh8aw3a2u6" path="res://assets/timerfont.png" id="16_c2igu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8tn2x"]
 texture = ExtResource("2_yqpgv")
@@ -2750,9 +2749,6 @@ sources/7 = SubResource("TileSetAtlasSource_xrt5x")
 sources/8 = SubResource("TileSetAtlasSource_3y8gh")
 sources/9 = SubResource("TileSetAtlasSource_sr1mt")
 
-[sub_resource type="LabelSettings" id="LabelSettings_xrt5x"]
-font = ExtResource("16_c2igu")
-
 [node name="Test" type="Node2D" unique_id=28049306 node_paths=PackedStringArray("player")]
 script = ExtResource("1_4qglm")
 level_time = 120.0
@@ -2800,13 +2796,6 @@ position = Vector2(-2024, -318)
 position = Vector2(-445, 18)
 scale = Vector2(-1, 1)
 
-[node name="Key" parent="." unique_id=2109226007 instance=ExtResource("16_c2igu")]
-position = Vector2(-1822, -29)
-initial_impulse = Vector2(10, -20)
-[node name="Label" type="Label" parent="." unique_id=564801796]
-offset_left = -2686.0
-offset_top = -260.0
-offset_right = -2462.0
-offset_bottom = -242.0
-text = "KEEP OFF GRASS"
-label_settings = SubResource("LabelSettings_xrt5x")
+[node name="Key" parent="." unique_id=1665529251 instance=ExtResource("16_c2igu")]
+position = Vector2(-1911, -27)
+initial_impulse = Vector2(100, -200)

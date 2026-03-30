@@ -72,7 +72,7 @@ func _physics_process(delta) -> void:
 		door_check(delta)
 		if Input.is_action_just_pressed("throw"):
 			var direction := Input.get_vector("left", "right", "up", "down")
-			if direction == Vector2.ZERO: direction = velocity.normalized()
+			if direction == Vector2.ZERO: direction = Vector2(-1. if facing_left else 1., 0.) if velocity.is_zero_approx() else velocity.normalized()
 			var transfer := velocity.project(direction)
 			direction *= transfer.length()
 			has_keys = false
