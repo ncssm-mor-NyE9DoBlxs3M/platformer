@@ -35,8 +35,6 @@ func _physics_process(delta) -> void:
 	else:
 		current_coyote_time = max(0, current_coyote_time-delta)
 		velocity.y += get_gravity().y * delta
-		if Input.is_action_just_pressed("down"):
-			velocity = Vector2(velocity.x/2., abs(velocity.y)+abs(velocity.x/2.))
 	if is_on_floor() or current_coyote_time > 0.:
 		if Input.is_action_pressed("jump"):
 			current_coyote_time = 0
@@ -69,8 +67,22 @@ func _physics_process(delta) -> void:
 		$Sprite.play("idle"+("_keys" if has_keys else ""))
 		$Sprite.speed_scale = 5
 	if position.y > 1000: # placeholder for death condition
-		die()
-	if has_keys: door_check(delta)
+		die(true)
+	if has_keys:
+		door_check(delta)
+		if Input.is_action_just_pressed("throw"):
+			var direction := Input.get_vector("left", "right", "up", "down")
+			if direction == Vector2.ZERO: direction = velocity.normalized()
+			var transfer := velocity.project(direction)
+			direction *= transfer.length()
+			has_keys = false
+			var keys := preload("res://objects/Key.tscn").instantiate()
+			keys.global_position = global_position - Vector2(0., 10.)
+			keys.initial_impulse = direction
+			keys.player_thrown = true
+			velocity = velocity - transfer - direction
+			add_sibling(keys)
+			$KeyThrow.play()
 	move_and_slide()
 	$SpeedSFX.pitch_scale = clamp(velocity.length()/500., 0.21, 2) # 0.21 roughly matches up with the idle animation
 	$Sparkles.amount_ratio = (0.25+clamp(velocity.length()/1500., 0., .75))*int(has_keys)
@@ -83,10 +95,11 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 		respawn_pos = area.position
 		area.activate()
 
-func die() -> void:
+func die(alt: bool = false) -> void:
 	position = respawn_pos
 	velocity = Vector2.ZERO
 	$Animations.play("death")
+	($Camera/AltDeathSound if alt else $Camera/DeathSound).play()
 	Events.player_died.emit()
 
 func reset() -> void:

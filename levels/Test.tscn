@@ -15,6 +15,9 @@
 [ext_resource type="Texture2D" uid="uid://dyhwf0fi8ymd2" path="res://assets/dark_wall.png" id="10_c2igu"]
 [ext_resource type="PackedScene" uid="uid://th1fk5f6pn1f" path="res://objects/LesserDoor.tscn" id="10_j5w31"]
 [ext_resource type="PackedScene" uid="uid://4sq8urqmmaxd" path="res://objects/GreaterDoor.tscn" id="11_lvc3g"]
+[ext_resource type="PackedScene" uid="uid://xqpxpgkf727i" path="res://objects/Key.tscn" id="16_c2igu"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_c2igu"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8tn2x"]
 texture = ExtResource("2_yqpgv")
@@ -2706,6 +2709,7 @@ texture_region_size = Vector2i(8, 8)
 tile_size = Vector2i(8, 8)
 physics_layer_0/collision_layer = 1
 physics_layer_0/collision_mask = 0
+physics_layer_0/physics_material = SubResource("PhysicsMaterial_c2igu")
 physics_layer_1/collision_layer = 2
 physics_layer_1/collision_mask = 0
 terrain_set_0/mode = 0
@@ -2781,3 +2785,7 @@ position = Vector2(-2024, -318)
 [node name="LesserDoor5" parent="." unique_id=1468690797 instance=ExtResource("10_j5w31")]
 position = Vector2(-445, 18)
 scale = Vector2(-1, 1)
+
+[node name="Key" parent="." unique_id=2109226007 instance=ExtResource("16_c2igu")]
+position = Vector2(-1822, -29)
+initial_impulse = Vector2(10, -20)

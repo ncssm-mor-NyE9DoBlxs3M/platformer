@@ -71,4 +71,4 @@ shape = SubResource("SegmentShape2D_40bpm")
 
 [node name="Sound" type="AudioStreamPlayer2D" parent="." unique_id=2118765750]
 stream = ExtResource("2_v2kpw")
-volume_db = 10.0
+volume_db = 15.0

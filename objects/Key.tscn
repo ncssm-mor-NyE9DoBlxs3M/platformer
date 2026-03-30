@@ -1,0 +1,173 @@
+[gd_scene format=3 uid="uid://xqpxpgkf727i"]
+
+[ext_resource type="Texture2D" uid="uid://3ook045j76ap" path="res://assets/key.png" id="1_memqv"]
+[ext_resource type="Script" uid="uid://hejdle8xdfro" path="res://objects/key.gd" id="1_pke0w"]
+[ext_resource type="Texture2D" uid="uid://bxptmexenipoe" path="res://assets/sparkle.png" id="3_e4pda"]
+[ext_resource type="AudioStream" uid="uid://bl0mqktanrbm" path="res://assets/key_destroy.wav" id="4_vyb6u"]
+[ext_resource type="AudioStream" uid="uid://q26i0nspqac8" path="res://assets/key_pickup.wav" id="5_ldvc0"]
+
+[sub_resource type="Curve" id="Curve_vyb6u"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.4745572, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ldvc0"]
+curve = SubResource("Curve_vyb6u")
+
+[sub_resource type="Gradient" id="Gradient_icow2"]
+colors = PackedColorArray(0.72, 0.32400006, 0, 1, 1, 1, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_lprha"]
+gradient = SubResource("Gradient_icow2")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_vyb6u"]
+particle_flag_disable_z = true
+particle_flag_damping_as_friction = true
+spread = 180.0
+initial_velocity_max = 128.0
+gravity = Vector3(0, 0, 0)
+damping_min = 1.0
+damping_max = 1.0
+scale_max = 2.0
+color_initial_ramp = SubResource("GradientTexture1D_lprha")
+alpha_curve = SubResource("CurveTexture_ldvc0")
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_pke0w"]
+friction = 0.1
+rough = true
+bounce = 0.75
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pke0w"]
+atlas = ExtResource("1_memqv")
+region = Rect2(0, 0, 5, 5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e4pda"]
+atlas = ExtResource("1_memqv")
+region = Rect2(5, 0, 5, 5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vyb6u"]
+atlas = ExtResource("1_memqv")
+region = Rect2(10, 0, 5, 5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ldvc0"]
+atlas = ExtResource("1_memqv")
+region = Rect2(15, 0, 5, 5)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_icow2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pke0w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e4pda")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vyb6u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ldvc0")
+}],
+"loop": true,
+"name": &"tumble",
+"speed": 10.0
+}]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_vyb6u"]
+particles_animation = true
+particles_anim_h_frames = 6
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ldvc0"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_max = 25.0
+gravity = Vector3(0, 0, 0)
+anim_speed_min = 1.5
+anim_speed_max = 1.5
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pke0w"]
+radius = 2.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e4pda"]
+radius = 5.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vyb6u"]
+radius = 2.0
+
+[node name="Key" type="Node2D" unique_id=1665529251]
+script = ExtResource("1_pke0w")
+
+[node name="Lanyard" type="Line2D" parent="." unique_id=1967461674]
+points = PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+width = 1.0
+default_color = Color(0.54509807, 0.13333334, 0.6627451, 1)
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+antialiased = true
+
+[node name="DestroyEffect" type="GPUParticles2D" parent="." unique_id=1491714780]
+emitting = false
+amount = 64
+lifetime = 0.25
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_vyb6u")
+
+[node name="Key" type="RigidBody2D" parent="." unique_id=2109226007]
+collision_layer = 0
+mass = 0.1
+physics_material_override = SubResource("PhysicsMaterial_pke0w")
+lock_rotation = true
+
+[node name="Head" type="AnimatedSprite2D" parent="Key" unique_id=849587731]
+sprite_frames = SubResource("SpriteFrames_icow2")
+animation = &"tumble"
+autoplay = "tumble"
+frame_progress = 0.73659366
+
+[node name="Sparkles" type="GPUParticles2D" parent="Key" unique_id=2142110427]
+material = SubResource("CanvasItemMaterial_vyb6u")
+amount = 4
+amount_ratio = 0.5
+texture = ExtResource("3_e4pda")
+lifetime = 0.3
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_ldvc0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Key" unique_id=1281479943]
+shape = SubResource("CircleShape2D_pke0w")
+
+[node name="Collection" type="Area2D" parent="Key" unique_id=1674376531]
+collision_layer = 0
+collision_mask = 64
+input_pickable = false
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Key/Collection" unique_id=647128524]
+shape = SubResource("CircleShape2D_e4pda")
+
+[node name="Destroy" type="Area2D" parent="Key" unique_id=969244969]
+collision_layer = 0
+collision_mask = 2
+input_pickable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Key/Destroy" unique_id=111188456]
+shape = SubResource("CircleShape2D_vyb6u")
+
+[node name="DestroySound" type="AudioStreamPlayer2D" parent="Key" unique_id=409853456]
+process_mode = 1
+stream = ExtResource("4_vyb6u")
+
+[node name="PickupSound" type="AudioStreamPlayer2D" parent="Key" unique_id=1263190323]
+process_mode = 1
+stream = ExtResource("5_ldvc0")
+
+[node name="DeadTime" type="Timer" parent="." unique_id=403546325]
+wait_time = 0.1
+one_shot = true
+autostart = true
+
+[connection signal="body_entered" from="Key/Collection" to="." method="_on_collection_body_entered"]
+[connection signal="body_entered" from="Key/Destroy" to="." method="_on_destroy_body_entered"]

@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://bxptmexenipoe" path="res://assets/sparkle.png" id="3_tdg3f"]
 [ext_resource type="AudioStream" uid="uid://b60ug8s68ecjn" path="res://assets/youve_got_a_minor.wav" id="4_cxr5p"]
 [ext_resource type="AudioStream" uid="uid://b0ds0sfgweikk" path="res://assets/speed.wav" id="5_cxr5p"]
+[ext_resource type="AudioStream" uid="uid://7oskcw4h1tp5" path="res://assets/youve_got_a_major.wav" id="6_dtqjt"]
+[ext_resource type="AudioStream" uid="uid://6tn44bc6nedu" path="res://assets/key_throw.wav" id="8_5ncpa"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_e80uo"]
 atlas = ExtResource("2_e80uo")
@@ -221,18 +223,6 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 0)]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Camera/DeathSound:playing")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
 
 [sub_resource type="Animation" id="Animation_e80uo"]
 resource_name = "death"
@@ -249,18 +239,6 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Camera/DeathSound:playing")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tdg3f"]
 _data = {
@@ -270,8 +248,9 @@ _data = {
 
 [node name="Player" type="CharacterBody2D" unique_id=1205682914]
 z_index = 1
-collision_layer = 0
+collision_layer = 64
 script = ExtResource("1_kpjcp")
+start_with_keys = false
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=1262533730]
 position = Vector2(0, -16)
@@ -321,6 +300,9 @@ texture = ExtResource("3_e80uo")
 [node name="DeathSound" type="AudioStreamPlayer" parent="Camera" unique_id=1203373155]
 stream = ExtResource("4_cxr5p")
 
+[node name="AltDeathSound" type="AudioStreamPlayer" parent="Camera" unique_id=1421367472]
+stream = ExtResource("6_dtqjt")
+
 [node name="Animations" type="AnimationPlayer" parent="." unique_id=568795726]
 libraries/ = SubResource("AnimationLibrary_tdg3f")
 
@@ -328,6 +310,9 @@ libraries/ = SubResource("AnimationLibrary_tdg3f")
 stream = ExtResource("5_cxr5p")
 volume_db = 10.0
 autoplay = true
+
+[node name="KeyThrow" type="AudioStreamPlayer2D" parent="." unique_id=2130243034]
+stream = ExtResource("8_5ncpa")
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
