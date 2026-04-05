@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/timerfont.png-87c82dee3453f8daff11868e2844290
 
 [params]
 
-character_ranges=PackedStringArray("\'1\'-\'9\'", "\'0\'", "\':\'", "\'.\'", "\'A\'-\'Z\'", "\' \'", "0x27")
+character_ranges=PackedStringArray("\'1\'-\'9\'", "\'0\'", "\':\'", "\'.\'", "\'A\'-\'Z\'", "\' \'", "0x27", "\'!\'")
 kerning_pairs=PackedStringArray()
 columns=12
 rows=4

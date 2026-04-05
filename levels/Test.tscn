@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://4sq8urqmmaxd" path="res://objects/GreaterDoor.tscn" id="11_lvc3g"]
 [ext_resource type="Texture2D" uid="uid://lsrknwah787e" path="res://assets/basketball.png" id="11_xrt5x"]
 [ext_resource type="PackedScene" uid="uid://xqpxpgkf727i" path="res://objects/Key.tscn" id="16_c2igu"]
+[ext_resource type="PackedScene" uid="uid://c8msh21oqlxu2" path="res://objects/EndTrigger.tscn" id="18_3y8gh"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_c2igu"]
 
@@ -2749,10 +2750,19 @@ sources/7 = SubResource("TileSetAtlasSource_xrt5x")
 sources/8 = SubResource("TileSetAtlasSource_3y8gh")
 sources/9 = SubResource("TileSetAtlasSource_sr1mt")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sr1mt"]
+size = Vector2(20, 101)
+
 [node name="Test" type="Node2D" unique_id=28049306 node_paths=PackedStringArray("player")]
 script = ExtResource("1_4qglm")
 level_time = 120.0
 player = NodePath("Player")
+level_id = "testing_level"
+p_rank = 100
+s_rank = 80
+a_rank = 60
+b_rank = 45
+c_rank = 20
 
 [node name="Tiles" type="TileMapLayer" parent="." unique_id=1247896836]
 position = Vector2(0, 2)
@@ -2799,3 +2809,10 @@ scale = Vector2(-1, 1)
 [node name="Key" parent="." unique_id=1665529251 instance=ExtResource("16_c2igu")]
 position = Vector2(-1911, -27)
 initial_impulse = Vector2(100, -200)
+
+[node name="EndTrigger" parent="." unique_id=295638079 instance=ExtResource("18_3y8gh")]
+position = Vector2(-2788, -246)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EndTrigger" unique_id=1355881864]
+position = Vector2(0, -50.5)
+shape = SubResource("RectangleShape2D_sr1mt")

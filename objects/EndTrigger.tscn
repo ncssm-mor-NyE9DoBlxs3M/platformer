@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://c8msh21oqlxu2"]
+
+[ext_resource type="Script" uid="uid://db1iwebtn5hbt" path="res://objects/end_trigger.gd" id="1_7b2wb"]
+
+[node name="EndTrigger" type="Area2D" unique_id=295638079]
+collision_layer = 0
+collision_mask = 64
+script = ExtResource("1_7b2wb")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

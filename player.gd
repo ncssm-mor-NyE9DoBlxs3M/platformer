@@ -19,6 +19,7 @@ class_name Player extends CharacterBody2D
 
 var current_coyote_time: float
 var facing_left: bool = false
+var has_control := true
 @onready var has_keys := start_with_keys
 
 @onready var initial_pos: Vector2 = position
@@ -28,7 +29,7 @@ func _ready() -> void:
 	Events.reset_level.connect(reset)
 
 func _physics_process(delta) -> void:
-	var input := Input.get_axis("left", "right")
+	var input := Input.get_axis("left", "right") if has_control else 0.
 	var horiz_delta: float = ((accel_rate if is_on_floor() else air_accel_rate) if (Vector2(input, 0).dot(velocity) > 0) else (decel_rate if is_on_floor() else air_decel_rate))*delta
 	var target := input*speed_cap
 	velocity.x = target if (abs(target-velocity.x) <= horiz_delta) else (velocity.x + sign(target-velocity.x) * horiz_delta)
@@ -38,7 +39,7 @@ func _physics_process(delta) -> void:
 		current_coyote_time = max(0, current_coyote_time-delta)
 		velocity.y += get_gravity().y * delta
 	if is_on_floor() or current_coyote_time > 0.:
-		if Input.is_action_pressed("jump"):
+		if Input.is_action_pressed("jump") and has_control:
 			current_coyote_time = 0
 			var jump_strength = min(jump_conversion*abs(velocity.x), max_jump_strength-min_jump_strength)
 			velocity.y -= jump_strength+min_jump_strength
@@ -72,7 +73,7 @@ func _physics_process(delta) -> void:
 		die(true)
 	if has_keys:
 		door_check(delta)
-		if Input.is_action_just_pressed("throw"):
+		if Input.is_action_just_pressed("throw") and has_control:
 			var direction := Input.get_vector("left", "right", "up", "down")
 			if direction == Vector2.ZERO: direction = Vector2(-1. if facing_left else 1., 0.)
 			var transfer := velocity.project(direction)
