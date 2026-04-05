@@ -39,6 +39,7 @@ func end_level() -> void:
 	$UI/Scoring/Background.color = Color.BLACK
 	$UI/Scoring/V/Time/Rank.text = " "
 	$UI/Scoring/V/Time/Rank.modulate = Color.RED
+	$UI/Scoring/V/Time/Timer.text = "0:00.00"
 	$UI/Scoring/V/Time.hide()
 	$UI/Scoring/V/NewBest.hide()
 	$UI/Scoring/V/Message.text = ""
