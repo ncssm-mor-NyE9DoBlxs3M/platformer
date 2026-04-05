@@ -14,6 +14,8 @@ class_name Player extends CharacterBody2D
 @export_group("Animation")
 @export var max_run_anim_speed: float = 50.
 @export var max_step_height: float = 10
+@export_group("Keys")
+@export var key_throw_speed: float = 250.
 
 var current_coyote_time: float
 var facing_left: bool = false
@@ -66,21 +68,21 @@ func _physics_process(delta) -> void:
 	else:
 		$Sprite.play("idle"+("_keys" if has_keys else ""))
 		$Sprite.speed_scale = 5
-	if position.y > 1000: # placeholder for death condition
+	if position.y > 1000:
 		die(true)
 	if has_keys:
 		door_check(delta)
 		if Input.is_action_just_pressed("throw"):
 			var direction := Input.get_vector("left", "right", "up", "down")
-			if direction == Vector2.ZERO: direction = Vector2(-1. if facing_left else 1., 0.) if velocity.is_zero_approx() else velocity.normalized()
+			if direction == Vector2.ZERO: direction = Vector2(-1. if facing_left else 1., 0.)
 			var transfer := velocity.project(direction)
-			direction *= transfer.length()
+			direction *= transfer.length() + key_throw_speed
+			velocity = velocity - 2.*transfer
 			has_keys = false
 			var keys := preload("res://objects/Key.tscn").instantiate()
 			keys.global_position = global_position - Vector2(0., 10.)
-			keys.initial_impulse = direction
+			keys.initial_impulse = direction + velocity
 			keys.player_thrown = true
-			velocity = velocity - transfer - direction
 			add_sibling(keys)
 			$KeyThrow.play()
 	move_and_slide()
