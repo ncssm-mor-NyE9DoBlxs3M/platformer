@@ -34,7 +34,7 @@ alpha_curve = SubResource("CurveTexture_ldvc0")
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_pke0w"]
 friction = 0.1
 rough = true
-bounce = 0.75
+bounce = 0.5
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pke0w"]
 atlas = ExtResource("1_memqv")
@@ -117,9 +117,9 @@ process_material = SubResource("ParticleProcessMaterial_vyb6u")
 
 [node name="Key" type="RigidBody2D" parent="." unique_id=2109226007]
 collision_layer = 0
-mass = 0.1
 physics_material_override = SubResource("PhysicsMaterial_pke0w")
 lock_rotation = true
+continuous_cd = 1
 
 [node name="Head" type="AnimatedSprite2D" parent="Key" unique_id=849587731]
 sprite_frames = SubResource("SpriteFrames_icow2")
