@@ -16,6 +16,7 @@ class_name Player extends CharacterBody2D
 @export var max_step_height: float = 10
 @export_group("Keys")
 @export var key_throw_speed: float = 250.
+@export var key_bonus_upward: float = 200.
 
 var current_coyote_time: float
 var facing_left: bool = false
@@ -74,15 +75,13 @@ func _physics_process(delta) -> void:
 	if has_keys:
 		door_check(delta)
 		if Input.is_action_just_pressed("throw") and has_control:
-			var direction := Input.get_vector("left", "right", "up", "down")
-			if direction == Vector2.ZERO: direction = Vector2(-1. if facing_left else 1., 0.)
-			var transfer := velocity.project(direction)
-			direction *= transfer.length() + key_throw_speed
-			velocity = velocity - 2.*transfer
+			var direction: Vector2 = Input.get_vector("left", "right", "up", "down")*key_throw_speed
+			if direction.y == 0: direction -= Vector2(0, key_bonus_upward)
 			has_keys = false
 			var keys := preload("res://objects/Key.tscn").instantiate()
 			keys.global_position = global_position - Vector2(0., 10.)
-			keys.initial_impulse = direction + velocity
+			keys.initial_impulse = direction
+			velocity = -direction
 			keys.player_thrown = true
 			add_sibling(keys)
 			$KeyThrow.play()
@@ -100,6 +99,7 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 
 func die(alt: bool = false) -> void:
 	position = respawn_pos
+	has_keys = false if respawn_pos != initial_pos else start_with_keys
 	velocity = Vector2.ZERO
 	$Animations.play("death")
 	($Camera/AltDeathSound if alt else $Camera/DeathSound).play()
