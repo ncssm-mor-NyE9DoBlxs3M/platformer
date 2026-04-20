@@ -75,7 +75,7 @@ func _physics_process(delta) -> void:
 	if has_keys:
 		door_check(delta)
 		if Input.is_action_just_pressed("throw") and has_control:
-			var direction: Vector2 = Input.get_vector("left", "right", "up", "down")*key_throw_speed
+			var direction: Vector2 = Input.get_vector("left", "right", "up", "down")*max(key_throw_speed, velocity.length())
 			if direction.y == 0: direction -= Vector2(0, key_bonus_upward)
 			has_keys = false
 			var keys := preload("res://objects/Key.tscn").instantiate()
