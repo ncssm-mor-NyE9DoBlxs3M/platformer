@@ -30,13 +30,13 @@ func unlock(instant: bool) -> void:
 		collision.set_deferred("disabled", true)
 
 const RED := Color.DARK_RED
-const GREEN := Color.DARK_GREEN
+const GREEN := Color.GREEN
 
 func _draw() -> void:
 	for fob in fobs:
-		draw_line(fob.position, Vector2(0, fob.position.y), GREEN if fob in active_fobs else RED, 1.)
-		draw_line(Vector2(0, fob.position.y), Vector2.ZERO, GREEN if fob in active_fobs else RED, 1.)
-
+		draw_line(fob.position, Vector2(0, fob.position.y), GREEN if fob in active_fobs else RED, 2.)
+		draw_line(Vector2(0, fob.position.y), Vector2.ZERO, GREEN if fob in active_fobs else RED, 2.)
+	
 func _process(_delta: float): queue_redraw()
 
 func lock() -> void:

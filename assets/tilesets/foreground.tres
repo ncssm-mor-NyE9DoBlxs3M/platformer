@@ -1,6 +1,7 @@
 [gd_resource type="TileSet" format=3 uid="uid://h5v074ut36ch"]
 
 [ext_resource type="Texture2D" uid="uid://ddf47psiqci70" path="res://assets/fence.png" id="1_gelb7"]
+[ext_resource type="Texture2D" uid="uid://diqmit3gxjo0o" path="res://assets/swac_light.png" id="2_7peem"]
 
 [sub_resource type="Gradient" id="Gradient_f6ltj"]
 interpolation_mode = 1
@@ -29,9 +30,19 @@ resource_name = "Fence"
 texture = ExtResource("1_gelb7")
 texture_region_size = Vector2i(8, 8)
 0:0/0 = 0
+0:0/0/z_index = 1
 1:0/0 = 0
+1:0/0/z_index = 1
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_y3ycj"]
+resource_name = "SWAC Hanging Light"
+texture = ExtResource("2_7peem")
+texture_region_size = Vector2i(8, 8)
+0:0/0 = 0
+0:1/0 = 0
 
 [resource]
 tile_size = Vector2i(8, 8)
 sources/0 = SubResource("TileSetAtlasSource_7peem")
 sources/1 = SubResource("TileSetAtlasSource_7mfft")
+sources/2 = SubResource("TileSetAtlasSource_y3ycj")
