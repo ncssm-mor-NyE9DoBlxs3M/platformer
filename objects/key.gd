@@ -16,7 +16,7 @@ func _physics_process(delta: float) -> void:
 	# Key door check
 	var result := KinematicCollision2D.new()
 	if $Key.test_move($Key.global_transform, $Key.linear_velocity*delta, result) and result.get_collider() is Door:
-		result.get_collider().unlock()
+		result.get_collider().activate()
 	# Verlet integration
 	for i in lanyard.size():
 		var temp := lanyard[i]

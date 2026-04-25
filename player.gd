@@ -2,15 +2,15 @@ class_name Player extends CharacterBody2D
 
 @export var start_with_keys: bool = true
 @export_group("Movement")
-@export var speed_cap: float = 1000.
-@export var accel_rate: float = 500.
+@export var speed_cap: float = 600.
+@export var accel_rate: float = 800.
 @export var decel_rate: float = 900.
 @export var air_accel_rate: float = 100.
 @export var air_decel_rate: float = 250.
-@export var min_jump_strength: float = 150
+@export var min_jump_strength: float = 200
 @export var max_jump_strength: float = 300
 @export var coyote_time: float = .2
-@export var jump_conversion: float = .5
+@export var jump_conversion: float = .25
 @export_group("Animation")
 @export var max_run_anim_speed: float = 50.
 @export var max_step_height: float = 10
@@ -33,7 +33,9 @@ func _physics_process(delta) -> void:
 	var input := Input.get_axis("left", "right") if has_control else 0.
 	var horiz_delta: float = ((accel_rate if is_on_floor() else air_accel_rate) if (Vector2(input, 0).dot(velocity) > 0) else (decel_rate if is_on_floor() else air_decel_rate))*delta
 	var target := input*speed_cap
+	var old_horiz_speed := velocity.x
 	velocity.x = target if (abs(target-velocity.x) <= horiz_delta) else (velocity.x + sign(target-velocity.x) * horiz_delta)
+	if old_horiz_speed < speed_cap: velocity.x = min(speed_cap,abs(velocity.x))*sign(velocity.x)
 	if is_on_floor():
 		current_coyote_time = coyote_time
 	else:
@@ -46,8 +48,6 @@ func _physics_process(delta) -> void:
 			velocity.y -= jump_strength+min_jump_strength
 			velocity.x -= jump_strength*sign(velocity.x)
 			$JumpEffect.restart()
-	if velocity.length_squared() > speed_cap**2:
-		velocity = velocity.normalized()*speed_cap
 	if velocity.y <= 0:
 		var stair_check := KinematicCollision2D.new()
 		var horizontal_movement := Vector2(velocity.x*delta, 0)
@@ -113,7 +113,7 @@ func reset() -> void:
 func door_check(delta: float) -> void:
 	var result := KinematicCollision2D.new()
 	if test_move(transform, velocity*delta, result) and result.get_collider() is Door:
-		result.get_collider().unlock()
+		result.get_collider().activate()
 # Admin Keys!
 # F1 to KYS
 func _process(_delta):

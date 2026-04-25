@@ -63,6 +63,14 @@ up={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="Walls"
+2d_physics/layer_2="Death"
+2d_physics/layer_3="Keys"
+2d_physics/layer_4="Key Grates"
+2d_physics/layer_8="Checkpoints"
+
 [physics]
 
 2d/default_gravity=500.0

@@ -1,0 +1,83 @@
+[gd_scene format=3 uid="uid://b8uc73jf3u0i0"]
+
+[ext_resource type="Script" uid="uid://04p2by2uu76m" path="res://objects/fob_reader.gd" id="1_2jj0l"]
+[ext_resource type="Texture2D" uid="uid://b3k5pacmkts7o" path="res://assets/fob_reader.png" id="1_u86e7"]
+[ext_resource type="AudioStream" uid="uid://bt3ejqvkd2rpj" path="res://assets/scan.wav" id="3_eei0k"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2jj0l"]
+atlas = ExtResource("1_u86e7")
+region = Rect2(8, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eei0k"]
+atlas = ExtResource("1_u86e7")
+region = Rect2(16, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ayxpl"]
+atlas = ExtResource("1_u86e7")
+region = Rect2(24, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jmibq"]
+atlas = ExtResource("1_u86e7")
+region = Rect2(32, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mvulv"]
+atlas = ExtResource("1_u86e7")
+region = Rect2(40, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0w6r6"]
+atlas = ExtResource("1_u86e7")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_v7dv6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2jj0l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eei0k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ayxpl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jmibq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mvulv")
+}],
+"loop": false,
+"name": &"activate",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0w6r6")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u86e7"]
+size = Vector2(16, 4)
+
+[node name="FobReader" type="Area2D" unique_id=348770069]
+collision_layer = 0
+collision_mask = 68
+input_pickable = false
+script = ExtResource("1_2jj0l")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=800712472]
+position = Vector2(0, -4)
+sprite_frames = SubResource("SpriteFrames_v7dv6")
+autoplay = "default"
+
+[node name="Collider" type="CollisionShape2D" parent="." unique_id=1253888138]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_u86e7")
+
+[node name="Sound" type="AudioStreamPlayer2D" parent="." unique_id=1020234510]
+stream = ExtResource("3_eei0k")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -249,6 +249,7 @@ _data = {
 [node name="Player" type="CharacterBody2D" unique_id=1205682914]
 z_index = 1
 collision_layer = 64
+collision_mask = 9
 script = ExtResource("1_kpjcp")
 start_with_keys = false
 

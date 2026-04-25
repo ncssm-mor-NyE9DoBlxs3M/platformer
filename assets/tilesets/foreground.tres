@@ -1,0 +1,37 @@
+[gd_resource type="TileSet" format=3 uid="uid://h5v074ut36ch"]
+
+[ext_resource type="Texture2D" uid="uid://ddf47psiqci70" path="res://assets/fence.png" id="1_gelb7"]
+
+[sub_resource type="Gradient" id="Gradient_f6ltj"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.125, 0.25, 0.375, 0.5, 0.625, 0.75, 0.875)
+colors = PackedColorArray(0, 0, 0, 0.1254902, 0, 0, 0, 0.2509804, 0, 0, 0, 0.3764706, 0, 0, 0, 0.5019608, 0, 0, 0, 0.627451, 0, 0, 0, 0.7294118, 0, 0, 0, 0.84705883, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_gelb7"]
+gradient = SubResource("Gradient_f6ltj")
+height = 8
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7peem"]
+resource_name = "Darkness"
+texture = SubResource("GradientTexture2D_gelb7")
+texture_region_size = Vector2i(8, 8)
+7:0/0 = 0
+6:0/0 = 0
+5:0/0 = 0
+4:0/0 = 0
+3:0/0 = 0
+2:0/0 = 0
+1:0/0 = 0
+0:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7mfft"]
+resource_name = "Fence"
+texture = ExtResource("1_gelb7")
+texture_region_size = Vector2i(8, 8)
+0:0/0 = 0
+1:0/0 = 0
+
+[resource]
+tile_size = Vector2i(8, 8)
+sources/0 = SubResource("TileSetAtlasSource_7peem")
+sources/1 = SubResource("TileSetAtlasSource_7mfft")

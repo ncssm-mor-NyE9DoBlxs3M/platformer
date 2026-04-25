@@ -116,7 +116,7 @@ explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_vyb6u")
 
 [node name="Key" type="RigidBody2D" parent="." unique_id=2109226007]
-collision_layer = 0
+collision_layer = 4
 physics_material_override = SubResource("PhysicsMaterial_pke0w")
 lock_rotation = true
 continuous_cd = 1

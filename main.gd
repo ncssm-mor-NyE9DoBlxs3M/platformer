@@ -81,6 +81,7 @@ func end_level() -> void:
 	await tween.finished
 	$UI/Scoring.hide()
 	$UI/MainMenu.show()
+	$UI/MainMenu/Menu/Play.grab_focus()
 	level.queue_free()
 
 func scoring_timer_tick(time: float) -> void:
